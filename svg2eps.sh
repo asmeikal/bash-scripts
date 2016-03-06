@@ -2,7 +2,7 @@
 # As seen on https://thingumabob.wordpress.com/2008/03/17/command-line-scripts-to-convert-svg-files-to-eps-pdf-and-png/
 
 print_usage () {
-	echo "usage:\t $0 inputfile.svg [outputfile.eps]"
+	echo "usage: $0 inputfile.svg [outputfile.eps]"
 }
 
 build_eps_filename () {
