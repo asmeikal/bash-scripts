@@ -6,7 +6,7 @@ NPROC=`nproc`
 
 usage() {
 	SCRIPT_NAME=`echo $0 | sed -r -e "s/.*\///"`
-	echo "Usage:$SCRIPT_NAME [print]"
+	echo "Usage: $SCRIPT_NAME [print]"
 	echo "With no argument underclocks CPU."
 }
 
