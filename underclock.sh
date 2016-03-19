@@ -1,6 +1,8 @@
 #!/bin/bash
 
 LOW_FREQ="1.6GhZ"
+MAX_FREQ="3.0GhZ"
+MAX_GOV="performance"
 GOVERNOR="powersave"
 NPROC=`nproc`
 
@@ -15,6 +17,14 @@ underclock() {
 		echo "Setting cpu $i to ${LOW_FREQ}..."
 		sudo cpufreq-set -c $i -u $LOW_FREQ
 		sudo cpufreq-set -c $i -g $GOVERNOR
+	done
+}
+
+overclock() {
+	for i in `seq 0 $(( $NPROC - 1))`; do
+		echo "Setting cpu $i to ${MAX_FREQ}..."
+		sudo cpufreq-set -c $i -u $MAX_FREQ
+		sudo cpufreq-set -c $i -g $MAX_GOV
 	done
 }
 
@@ -39,6 +49,8 @@ fi
 
 case $1 in
 	"print") printstatus
+		;;
+	"sprint") overclock
 		;;
 	"") underclock
 		;;
