@@ -5,7 +5,7 @@ PROPERTY="Device Enabled"
 
 usage() {
 	SCRIPT_NAME=`echo $0 | sed -r -e "s/.*\///"`
-	echo "Usage:$SCRIPT_NAME [on|off]"
+	echo "Usage: $SCRIPT_NAME [on|off]"
 	echo "With no argument toggles touchpad."
 }
 
@@ -26,6 +26,19 @@ toggle_touchpad() {
 	esac
 }
 
+print_touchpad_status() {
+	STATUS=`xinput --list-props "$TOUCHPAD" |
+			grep "$PROPERTY" |
+			sed -r -e "s/.*([0-1])$/\1/"`
+
+	case $STATUS in
+		"1") echo "Touchpad is enabled"
+			;;
+		"0") echo "Touchpad is disabled."
+			;;
+	esac
+}
+
 if [[ $# > 1 ]] ; then
 	usage
 	exit 1
@@ -35,6 +48,8 @@ case $1 in
 	"on") set_touchpad 1
 		;;
 	"off") set_touchpad 0
+		;;
+	"status") print_touchpad_status
 		;;
 	"") toggle_touchpad
 		;;
