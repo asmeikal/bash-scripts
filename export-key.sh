@@ -12,6 +12,18 @@ fi
 
 KEYID=$1
 
+gpg --list-public-keys ${KEYID}
+if [ "$?" -ne 1 ] ; then
+	echo "Public key \"${KEYID}\" not in keyring."
+	exit 2
+fi
+
+gpg --list-private-keys ${KEYID}
+if [ "$?" -ne 1 ] ; then
+	echo "Private key \"${KEYID}\" not in keyring."
+	exit 3
+fi
+
 gpg --output ${PUBKEY} --export ${KEYID}
 
 gpg --output - --export-secret-key ${KEYID} | \
