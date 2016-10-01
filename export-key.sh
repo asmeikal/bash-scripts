@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # as seen on https://montemazuma.wordpress.com/2010/03/01/moving-a-gpg-key-privately/
 
@@ -13,13 +13,13 @@ fi
 KEYID=$1
 
 gpg --list-public-keys ${KEYID}
-if [ "$?" -ne 1 ] ; then
+if [ "$?" -ne 0 ] ; then
 	echo "Public key \"${KEYID}\" not in keyring."
 	exit 2
 fi
 
-gpg --list-private-keys ${KEYID}
-if [ "$?" -ne 1 ] ; then
+gpg -K ${KEYID}
+if [ "$?" -ne 0 ] ; then
 	echo "Private key \"${KEYID}\" not in keyring."
 	exit 3
 fi

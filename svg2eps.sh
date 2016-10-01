@@ -22,4 +22,4 @@ fi
 
 echo "Converting $1 to $OUTPUT ..."
 
-inkscape -z -T -E $OUTPUT $1
+inkscape -z -T -E "$OUTPUT" "$1"
