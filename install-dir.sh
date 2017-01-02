@@ -15,7 +15,7 @@ for d in $@ ; do
 		echo "Installing file ${fname}..."
 		stripdir="$(echo "${d}" | tr -d '[[:space:]]')"
 		echo "ln -s ${stripdir}/${f} ${fname}"
-		ln -s ${stripdir}/${f} ${fname}
+		ln -s "${stripdir}/${f}" "${fname}"
 	done
 done
 
